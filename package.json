@@ -1,11 +1,30 @@
 {
-  "name": "rfs-cli",
+  "name": "rsf-cli",
   "version": "1.0.0",
   "description": "A way to initialize react components for your react projects",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC"
+  "keywords": [
+    "cli",
+    "rsf"
+  ],
+  "bin":{
+    "rsf":"./index.js"
+  },
+  "author": "avinash-vk",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "chalk": "^4.1.1",
+    "clear": "^0.1.0",
+    "clui": "^0.3.6",
+    "conf": "^10.0.1",
+    "esm": "^3.2.25",
+    "figlet": "^1.5.0",
+    "inquirer": "^8.0.0",
+    "minimist": "^1.2.5",
+    "touch": "^3.1.0"
+  }
 }
