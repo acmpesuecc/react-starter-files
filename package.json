@@ -10,8 +10,8 @@
     "cli",
     "rsf"
   ],
-  "bin":{
-    "rsf":"./index.js"
+  "bin": {
+    "rsf": "./index.js"
   },
   "author": "avinash-vk",
   "license": "ISC",
