@@ -4,8 +4,8 @@ import inquirer from 'inquirer';
 
 import { Intro } from '../../utils/interactiveOutputs';
 
-const createPagesFolder = () => {
-    fs.mkdirSync(process.cwd()+"/src/pages",{ recursive:true}, (error)=>{
+const createFolder = (path) => {
+    fs.mkdirSync(process.cwd()+"/src"+path,{ recursive:true}, (error)=>{
         if(error){
             console.error("ERROR OCCURED:",error);
             return false;
@@ -22,6 +22,12 @@ const componentTemplate = (component) => {
     )
 }
 
+const routesTemplate = (pages) => {
+    return (
+    `export default {${pages.map(page=>{return (`\n\t${page.name}: '${page.route}'`)})}\n};`
+    )
+}
+
 const createPageFile = ({component}) => {
     fs.writeFile(process.cwd()+`/src/pages/${component}.js`,componentTemplate(component),(error)=>{
         if(error){
@@ -33,8 +39,22 @@ const createPageFile = ({component}) => {
         }
     })
 }
+
+const createRouteFile = (pages) => {
+    console.log("HEREEE")
+    fs.writeFile(process.cwd()+`/src/routes/index.js`,routesTemplate(pages),(error)=>{
+        if(error){
+            console.log("ERROR OCCURED:",error);
+            return false;
+        }
+        else {
+            return true;
+        }
+    })
+}
+
 const init = async (showIntro=true) => {
-    clear();
+    
     if (showIntro) Intro();
 
     const pages = [
@@ -78,7 +98,6 @@ const init = async (showIntro=true) => {
                     component:answers.page,
                     route:answers.route
                 }
-                pages.push(page);
             }
         }
         catch(err){
@@ -92,6 +111,9 @@ const init = async (showIntro=true) => {
     //flag= createPagesFolder(pages);
     if(true) {
         pages.forEach(page => createPageFile(page));
+        flag = createFolder('/routes');
+        console.log("flag")
+        if(true) createRouteFile(pages);
     }
 }
 
