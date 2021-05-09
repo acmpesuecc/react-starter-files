@@ -2,6 +2,7 @@ import fs from "fs";
 import clear from "clear";
 import inquirer from "inquirer";
 
+import { routesTemplate, componentTemplate } from '../../templates';
 import { Intro } from "../../utils/interactiveOutputs";
 
 const createFolder = (path) => {
@@ -15,15 +16,9 @@ const createFolder = (path) => {
   });
 };
 
-const componentTemplate = (component) => {
-  return `import React from 'react';\n\nconst ${component} = () => {\n\treturn (\n\t\t<div>${component}</div>\n\t)\n};\n\nexport default ${component};`;
-};
 
-const routesTemplate = (pages) => {
-  return `export default {${pages.map((page) => {
-    return `\n\t${page.name}: '${page.route}'`;
-  })}\n};`;
-};
+
+
 
 const createComponentFile = (component) => {
   fs.writeFile(
@@ -127,6 +122,7 @@ const init = async (showIntro = true) => {
         message: "Which route should it point to:",
       },
     ]);
+
     try {
       if (answers.page === "*qa" || answers.route === "*qa") {
         flag = 0;
@@ -145,6 +141,7 @@ const init = async (showIntro = true) => {
       console.log("ERROR", err);
     }
   }
+
   console.log("\n");
   answer = await inquirer.prompt([
     {
