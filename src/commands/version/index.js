@@ -1,7 +1,7 @@
-import { version as packageVersion } from '../../../package.json';
+import { version as packageVersion } from "../../../package.json";
 
 const version = () => {
-    console.log(packageVersion);
-}
+  console.log(packageVersion);
+};
 
 export default version;

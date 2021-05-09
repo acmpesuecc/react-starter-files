@@ -72,7 +72,7 @@ const createRouteFile = (pages) => {
 };
 
 const init = async (showIntro = true) => {
-clear();
+  clear();
   if (showIntro) Intro();
   /*
     const pages = [
