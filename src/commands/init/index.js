@@ -2,7 +2,7 @@ import fs from "fs";
 import clear from "clear";
 import inquirer from "inquirer";
 
-import { routesTemplate, componentTemplate } from '../../templates';
+import { routesTemplate, componentTemplate, appTemplate } from '../../templates';
 import { Intro } from "../../utils/interactiveOutputs";
 
 const createFolder = (path) => {
@@ -16,9 +16,20 @@ const createFolder = (path) => {
   });
 };
 
-
-
-
+const createAppFile = (pages) => {
+    fs.writeFile(
+        process.cwd() + `/src/App.js`,
+        appTemplate(pages),
+        (error) => {
+        if (error) {
+            console.log("ERROR OCCURED:", error);
+            return false;
+        } else {
+            return true;
+        }
+        }
+  );
+}
 
 const createComponentFile = (component) => {
   fs.writeFile(
@@ -193,6 +204,8 @@ const init = async (showIntro = true) => {
 
   createFolder("/components");
   components.forEach((component) => createComponentFile(component));
+
+  createAppFile(pages);
 
   console.info("\n✅ Done");
 };
