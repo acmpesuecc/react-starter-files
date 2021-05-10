@@ -17,5 +17,14 @@ export const main = async (args) => {
     case "init":
       commands.init(args);
       break;
+
+    case "create-react-app":
+      let path = args._.length > 1 && args._[1];
+      console.log(path, args);
+      if (path) {
+        commands.createReactApp(path);
+      } else {
+        console.error("⭕ Path name not provided! Please checkout the docs!\n");
+      }
   }
 };

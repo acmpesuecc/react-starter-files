@@ -2,38 +2,46 @@ import fs from "fs";
 import clear from "clear";
 import inquirer from "inquirer";
 
-import { routesTemplate, componentTemplate, appTemplate } from '../../templates';
+import {
+  routesTemplate,
+  componentTemplate,
+  appTemplate,
+} from "../../templates";
 import { Intro } from "../../utils/interactiveOutputs";
 
-const createFolder = (path) => {
-  fs.mkdirSync(process.cwd() + "/src" + path, { recursive: true }, (error) => {
-    if (error) {
-      console.error("ERROR OCCURED:", error);
-      return false;
-    } else {
-      return true;
+const createFolder = (dir, path) => {
+  fs.mkdirSync(
+    process.cwd() + path + "/src" + dir,
+    { recursive: true },
+    (error) => {
+      if (error) {
+        console.error("ERROR OCCURED:", error);
+        return false;
+      } else {
+        return true;
+      }
     }
-  });
+  );
 };
 
-const createAppFile = (pages) => {
-    fs.writeFile(
-        process.cwd() + `/src/App.js`,
-        appTemplate(pages),
-        (error) => {
-        if (error) {
-            console.log("ERROR OCCURED:", error);
-            return false;
-        } else {
-            return true;
-        }
-        }
-  );
-}
-
-const createComponentFile = (component) => {
+const createAppFile = (pages, path) => {
   fs.writeFile(
-    process.cwd() + `/src/components/${component}.js`,
+    process.cwd() + path + `/src/App.js`,
+    appTemplate(pages),
+    (error) => {
+      if (error) {
+        console.log("ERROR OCCURED:", error);
+        return false;
+      } else {
+        return true;
+      }
+    }
+  );
+};
+
+const createComponentFile = (component, path) => {
+  fs.writeFile(
+    process.cwd() + path + `/src/components/${component}.js`,
     componentTemplate(component),
     (error) => {
       if (error) {
@@ -46,9 +54,9 @@ const createComponentFile = (component) => {
   );
 };
 
-const createPageFile = ({ component }) => {
+const createPageFile = (component, path) => {
   fs.writeFile(
-    process.cwd() + `/src/pages/${component}.js`,
+    process.cwd() + path + `/src/pages/${component}.js`,
     componentTemplate(component),
     (error) => {
       if (error) {
@@ -61,10 +69,9 @@ const createPageFile = ({ component }) => {
   );
 };
 
-const createRouteFile = (pages) => {
-  console.log("HEREEE");
+const createRouteFile = (pages, path) => {
   fs.writeFile(
-    process.cwd() + `/src/routes/index.js`,
+    process.cwd() + path + `/src/routes/index.js`,
     routesTemplate(pages),
     (error) => {
       if (error) {
@@ -77,9 +84,13 @@ const createRouteFile = (pages) => {
   );
 };
 
-const init = async (showIntro = true) => {
+const init = async (showIntro = true, path) => {
   clear();
-  if (showIntro) Intro();
+  const line = "-".repeat(process.stdout.columns);
+  if (showIntro) {
+    clear();
+    Intro();
+  }
   /*
     const pages = [
         {
@@ -95,7 +106,7 @@ const init = async (showIntro = true) => {
     ];
     
     const components = ["Navbar", "ProjectCard"];
-*/
+    */
 
   const pages = [];
   const components = [];
@@ -120,6 +131,9 @@ const init = async (showIntro = true) => {
     console.log("Couldn't understand you, answer with y/n only :( \n");
     return;
   }
+
+  console.log("\n");
+  console.log(line);
 
   while (flag) {
     console.log("\n");
@@ -153,6 +167,8 @@ const init = async (showIntro = true) => {
     }
   }
 
+  console.log("\n");
+  console.log(line);
   console.log("\n");
   answer = await inquirer.prompt([
     {
@@ -193,21 +209,24 @@ const init = async (showIntro = true) => {
       console.log("ERROR", err);
     }
   }
-
+  console.log(line);
   console.info("\n Creating files..");
 
-  createFolder("/pages");
-  pages.forEach((page) => createPageFile(page));
+  createFolder("/pages", path);
+  pages.forEach((page) => createPageFile(page.component, path));
 
-  createFolder("/routes");
-  createRouteFile(pages);
+  createFolder("/routes", path);
+  createRouteFile(pages, path);
 
-  createFolder("/components");
-  components.forEach((component) => createComponentFile(component));
+  createFolder("/components", path);
+  components.forEach((component) => createComponentFile(component, path));
 
-  createAppFile(pages);
+  createAppFile(pages, path);
 
   console.info("\n✅ Done");
+  console.info(
+    "\n\nThank you for using rsf, show your support by ⭐ing it on github at https://github.com/avinash-vk/react-starter-files."
+  );
 };
 
 export default init;
