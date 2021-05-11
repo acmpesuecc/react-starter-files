@@ -5,7 +5,7 @@ Everytime I created a React app, the first thing I did was setup the project by 
 React starter files is a command line utility that allows you to initialize your react app with your preferred components before you begin development.
 
 
-[demo](https://drive.google.com/uc?export=view&id=101Q9tgICPvsLVToBcb90lMt-xUBvKTJA)
+![demo](https://drive.google.com/uc?export=view&id=101Q9tgICPvsLVToBcb90lMt-xUBvKTJA)
 
 
 ## Install it
