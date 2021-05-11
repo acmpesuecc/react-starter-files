@@ -40,6 +40,10 @@ const createReactApp = async (path) => {
       console.info(`\n\n✔️ Create-react-app successfully executed!\n`);
 
       await init(false, path === "." ? "" : `/${path}`);
+      console.info("\n✅ Done");
+      console.info(
+        "\n\nThank you for using rsf, show your support by ⭐ing it on github at https://github.com/avinash-vk/react-starter-files."
+      );
     })
     .catch((err) => {
       console.log(chalk.redBright(`❌ create-react-app failed!:${err}`));

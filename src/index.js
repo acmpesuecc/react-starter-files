@@ -15,7 +15,7 @@ export const main = async (args) => {
       break;
 
     case "init":
-      commands.init(args);
+      commands.init();
       break;
 
     case "create-react-app":
@@ -26,7 +26,11 @@ export const main = async (args) => {
         console.error("⭕ Path name not provided! Please checkout the docs!\n");
       }
       break;
-
+    
+    case "firebase-init":
+      commands.firebaseInit();
+      break;
+      
     case "help":
       commands.help(args);
       break;

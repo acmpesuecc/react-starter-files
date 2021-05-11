@@ -1,6 +1,6 @@
 {
   "name": "rsf-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A way to initialize react components for your react projects",
   "main": "index.js",
   "scripts": {
@@ -36,6 +36,7 @@
     "conf": "^10.0.1",
     "esm": "^3.2.25",
     "figlet": "^1.5.0",
+    "glob": "^7.1.7",
     "inquirer": "^8.0.0",
     "minimist": "^1.2.5",
     "prettier": "^2.2.1",

@@ -8,10 +8,11 @@ import {
   appTemplate,
 } from "../../templates";
 import { Intro } from "../../utils/interactiveOutputs";
+import firebaseInit from '../firebase-init';
 
-const createFolder = (dir, path) => {
+const createFolder = (path, dir) => {
   fs.mkdirSync(
-    process.cwd() + path + "/src" + dir,
+    process.cwd() + dir + "/src" + path,
     { recursive: true },
     (error) => {
       if (error) {
@@ -84,7 +85,7 @@ const createRouteFile = (pages, path) => {
   );
 };
 
-const init = async (showIntro = true, path) => {
+const init = async (showIntro = true, path="") => {
   clear();
   const line = "-".repeat(process.stdout.columns);
   if (showIntro) {
@@ -222,7 +223,9 @@ const init = async (showIntro = true, path) => {
   components.forEach((component) => createComponentFile(component, path));
 
   createAppFile(pages, path);
-
+  
+  await firebaseInit(path=path, showIntro=false);
+  
   console.info("\n✅ Done");
   console.info(
     "\n\nThank you for using rsf, show your support by ⭐ing it on github at https://github.com/avinash-vk/react-starter-files."
