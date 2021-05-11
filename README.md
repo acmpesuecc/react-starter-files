@@ -20,25 +20,31 @@ npm install rsf-cli
 rsf <command> [--options]
 ```
 
-- ### init
+> ### init
 Initialize your already created react app with pages and components.
 ```bash
 rsf init
 ```
 
-- ### create-react-app
+> ### firebase-init
+Add firebase integration to an app created using `rsf init`.
+```bash
+rsf init
+```
+
+> ### create-react-app
 Run create-react-app as well as rsf init in a single command
 ```bash
 rsf create-react-app myapp
 ```
 
-- ### help
+> ### help
 Get help for all your commands :)
 ```bash
 rsf help
 ```
 
-- ### version
+> ### version
 Check the current version for your rsf-cli!
 ```bash
 rsf version
