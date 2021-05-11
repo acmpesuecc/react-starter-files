@@ -7,7 +7,7 @@ const config = (services) => {
     let authServices='';
     if(services.length!=0){
         authServices+='export const auth = app.auth();\n';
-        services.forEach(service => service==email ? '' : authServices+=PROVIDERS[service]+"\n");
+        services.forEach(service => service=='email' ? '' : authServices+=PROVIDERS[service]+"\n");
     }
     return `    
 import firebase from "firebase/app"

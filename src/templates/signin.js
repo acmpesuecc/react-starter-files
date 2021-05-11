@@ -26,9 +26,9 @@ export default signinTemplate = (services) => {
         }
         else {
             authImports += `${service}Signin, `
-            authOutputs += `or\n<button onClick={${service}Signin} > ${service} Signin </button>\n`
+            authOutputs += `or\n\t\t\t<button onClick={${service}Signin} > ${service} Signin </button>\n`
         }
-    })
+    });
     return `
 import React, { useState } from 'react';
 import { useAuth } from '../firebase';
@@ -48,7 +48,7 @@ const Signin = () => {
             }}
         >
             <h1>Signin</h1>
-            <form onSubmit={${service==='email'? 'handleSubmit' : '()=>{}'}}>
+            <form onSubmit={${services.includes('email')? 'handleSubmit' : '()=>{}'}}>
                 ${authOutputs}
             </form>
         </div>

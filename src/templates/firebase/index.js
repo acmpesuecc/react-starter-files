@@ -40,18 +40,18 @@ const ${name}Signin = () => {
 `
 
 const fbIndex = (services) => {
-    const authProviderImports = ''
-    const authMethods = '';
-    const authExports = '';
+    let authProviderImports = ''
+    let authMethods = '';
+    let authExports = '';
     services.forEach( service => {
         if (service === 'email') {
             authMethods += emailAuthTemplate();
-            authExports += 'login,\nsignup,\nresetPassword,\n'
+            authExports += 'login,\n\t\t\t\tsignup,\n\t\t\t\tresetPassword,\n\t\t\t\t'
         }
         else {
             authProviderImports += (`, ${service}Provider`)
             authMethods += providerAuthTemplate(service);
-            authExports += `${service}Signin,\n`
+            authExports += `${service}Signin,\n\t\t\t\t`
         }
     })
     return `
@@ -87,7 +87,7 @@ export const AuthProvider = ({children}) => {
         <AuthContext.Provider
             value = {{
                 currentUser,
-                ${authExports}
+				${authExports}
                 logout,
                 errors,
                 setErrors

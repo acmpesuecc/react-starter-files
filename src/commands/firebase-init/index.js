@@ -1,11 +1,15 @@
 import fs from "fs";
 import clear from "clear";
 import inquirer from "inquirer";
+import glob from "glob";
 
 import {
-  appTemplate,
+  fbIndexTemplate,
+  configTemplate,
+  fbAppTemplate,
+  signinTemplate,
+  signupTemplate
 } from "../../templates";
-import { Intro } from "../../utils/interactiveOutputs";
 
 const createFolder = (folderPath) => {
   fs.mkdirSync(
@@ -44,13 +48,26 @@ const doesDirectoryExist = (dirPath) => {
     })
 }
 
-const firebaseInit = (path="") => {
+const getPages = (path) => {
+  let x = path+'src/routes/index.js';
+    const content = fs.readFileSync(x);
+    let y = content.toString().match(/export default ([\s\S]*?);/);
+    y = y[1].replace(/\s/g, '').replace('{','').replace('}','').split(',');
+    let pages = []
+    y.forEach(object => {
+      let tmp = object.split(":");
+      pages.push({
+        name:tmp[0],
+        route:tmp[1].replace(/['"]+/g, ''),
+        component:tmp[0][0].toUpperCase()+tmp[0].slice(1)
+      })
+    });
+    return pages;
+}
 
-    // keeps track of different providers used.
-    let providers = [];
+const firebaseInit = async (path="") => {
 
     let answers, check;    
-    
     check = await inquirer.prompt([
         {
           name: "check",
@@ -71,26 +88,37 @@ const firebaseInit = (path="") => {
         {
             type:'checkbox',
             name:"services",
-            message:"Choose your services (Press <space> to select, <a> to toggle all, <i> to inverse selection):",
-            options:services,
+            message:"Choose your services:",
+            choices:services,
         }
     ]);
     
-    console.log("Your choices:", answers);
+    services = answers.services;
+    
+    console.log("\n");
+    let pages = getPages(path);
+    let choices = pages.map(page => ({name:page.route,value:page}))
+    answers = await inquirer.prompt([
+      {
+          type:'checkbox',
+          name:"privatePages",
+          message:"Select the routes you want to add as authenticated routes:",
+          choices,
+      }
+    ]);
+    let privatePages = answers.privatePages;
 
     createFolder(path+"/src/firebase");
-
-
-    createFile(path+"/src/firebase/config.js");
-    createFile(path+"/src/firebase/index.js");
+    createFile(path+"/src/firebase/config.js", configTemplate(services));
+    createFile(path+"/src/firebase/index.js", fbIndexTemplate(services));
     
-
+    
     if (!doesDirectoryExist(path+"/src/pages")){
         createFolder(path+"/src/pages");
     }
-    createFile(path+"/src/pages/signin.js");
-    createFile(path+"/src/pages/signup.js")
-
-}
+    createFile(path+"/src/pages/signin.js", signinTemplate(services));
+    createFile(path+"/src/pages/signup.js", signupTemplate(services));
+    createFile(path+"/src/App.js", fbAppTemplate(pages,privatePages));
+} 
 
 export default firebaseInit;

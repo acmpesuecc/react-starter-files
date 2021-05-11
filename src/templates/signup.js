@@ -26,7 +26,7 @@ export default signupTemplate = (services) => {
         }
         else {
             authImports += `${service}Signin, `
-            authOutputs += `or\n<button onClick={${service}Signin} > ${service} Signin </button>\n`
+            authOutputs += `or\n\t\t<button onClick={${service}Signin} > ${service} Signin </button>\n`
         }
     })
     return `
@@ -48,7 +48,7 @@ const Signup = () => {
             }}
         >
             <h1>Signup</h1>
-            <form onSubmit={${service==='email'? 'handleSubmit' : '()=>{}'}}>
+            <form onSubmit={${services.includes('email')? 'handleSubmit' : '()=>{}'}}>
                 ${authOutputs}
             </form>
         </div>
