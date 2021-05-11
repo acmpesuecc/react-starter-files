@@ -15,7 +15,7 @@ export const main = async (args) => {
       break;
 
     case "init":
-      commands.init(args);
+      commands.init();
       break;
 
     case "create-react-app":

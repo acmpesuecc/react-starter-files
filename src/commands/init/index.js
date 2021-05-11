@@ -9,9 +9,9 @@ import {
 } from "../../templates";
 import { Intro } from "../../utils/interactiveOutputs";
 
-const createFolder = (dir, path) => {
+const createFolder = (path, dir) => {
   fs.mkdirSync(
-    process.cwd() + path + "/src" + dir,
+    process.cwd() + dir + "/src" + path,
     { recursive: true },
     (error) => {
       if (error) {
@@ -84,7 +84,7 @@ const createRouteFile = (pages, path) => {
   );
 };
 
-const init = async (showIntro = true, path) => {
+const init = async (showIntro = true, path="") => {
   clear();
   const line = "-".repeat(process.stdout.columns);
   if (showIntro) {
