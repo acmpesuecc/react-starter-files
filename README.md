@@ -29,7 +29,7 @@ rsf init
 > ### firebase-init
 Add firebase integration to an app created using `rsf init`.
 ```bash
-rsf init
+rsf firebase-init
 ```
 
 > ### create-react-app
