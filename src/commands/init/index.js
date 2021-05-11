@@ -224,12 +224,12 @@ const init = async (showIntro = true, path="") => {
 
   createAppFile(pages, path);
   
-  firebaseInit(path=path, showIntro=false);
-  if(showIntro){
+  await firebaseInit(path=path, showIntro=false);
+  
   console.info("\n✅ Done");
   console.info(
     "\n\nThank you for using rsf, show your support by ⭐ing it on github at https://github.com/avinash-vk/react-starter-files."
-  );}
+  );
 };
 
 export default init;

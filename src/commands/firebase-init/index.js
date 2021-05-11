@@ -99,6 +99,19 @@ const firebaseInit = async (path="", intro=true) => {
     
     services = answers.services;
 
+    console.log("\n");
+    let pages = getPages(path);
+    let choices = pages.map(page => ({name:page.route,value:page}))
+    answers = await inquirer.prompt([
+      {
+          type:'checkbox',
+          name:"privatePages",
+          message:"Select the routes you want to add as authenticated routes:",
+          choices,
+      }
+    ]);
+    let privatePages = answers.privatePages;
+    
     createFolder(path+"/src/firebase");
     createFile(path+"/src/firebase/config.js", configTemplate(services));
     createFile(path+"/src/firebase/index.js", fbIndexTemplate(services));

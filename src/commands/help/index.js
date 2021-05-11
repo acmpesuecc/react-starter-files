@@ -4,6 +4,7 @@ const menus = {
   main: `
  🔥 ${chalk.greenBright('rsf [command] <options>')}
     ${chalk.blueBright('init')} ................ create components for your react app with rsf
+    ${chalk.blueBright('firebase-init')} ................ initialize your directory with firebase provider and auth methods and workflow
     ${chalk.blueBright('create-react-app')}.............. run cra along with with rsf with a single command
     ${chalk.blueBright('version')} ............ show package version
     ${chalk.blueBright('help')} ............... show help menu for a command
@@ -19,6 +20,12 @@ const menus = {
   ${chalk.redBright('\nSyntax')}
   ${chalk.greenBright('rsf create-react-app <your-app-name>')}
   ${chalk.redBright('\nDescription')}\n${chalk.whiteBright('Creates a react app using the cra template and runs rsf init in one command.')}
+  `,
+
+  'firebase-init':`\n${chalk.redBright('firebase-init')} : Initialize firebase auth services in your application.
+  ${chalk.redBright('\nSyntax')}
+  ${chalk.greenBright('rsf firebase-init')}
+  ${chalk.redBright('\nDescription')}\n${chalk.whiteBright('This command creates firebase config files along with methods with google and github providers and also provides template signin/signup forms. Note: To run this successfully, make sure this is run only after `rsf init` is executed.')}
   `,
 
   help:`\n${chalk.redBright('help')} : Provides you help in times of need
