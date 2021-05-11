@@ -8,13 +8,25 @@
   },
   "keywords": [
     "cli",
-    "rsf"
+    "rsf",
+    "react-starter-files",
+    "react",
+    "boilerplate"
   ],
+  "homepage": "https://github.com/avinash-vk/react-starter-files",
   "bin": {
     "rsf": "./index.js"
   },
-  "author": "avinash-vk",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/avinash-vk/react-starter-files"
+  },
+  "bugs": {
+    "url": "https://github.com/avinash-vk/react-starter-files/issues",
+    "email": "avinash2000vk@gmail.com"
+  },
+  "license": "MIT",
+  "private": false,
   "dependencies": {
     "axios": "^0.21.1",
     "chalk": "^4.1.1",
