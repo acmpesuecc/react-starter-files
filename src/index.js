@@ -20,11 +20,19 @@ export const main = async (args) => {
 
     case "create-react-app":
       let path = args._.length > 1 && args._[1];
-      console.log(path, args);
       if (path) {
         commands.createReactApp(path);
       } else {
         console.error("⭕ Path name not provided! Please checkout the docs!\n");
       }
+      break;
+
+    case "help":
+      commands.help(args);
+      break;
+
+    default:
+      console.info("\⭕ Looks like the command you're looking for doesn't exist!\n");
+      commands.help(args);
   }
 };
