@@ -1,7 +1,6 @@
 import fs from "fs";
 import clear from "clear";
 import inquirer from "inquirer";
-import glob from "glob";
 
 import {
   fbIndexTemplate,
@@ -10,6 +9,8 @@ import {
   signinTemplate,
   signupTemplate
 } from "../../templates";
+
+import { Intro } from '../../utils/interactiveOutputs';
 
 const createFolder = (folderPath) => {
   fs.mkdirSync(
@@ -65,8 +66,11 @@ const getPages = (path) => {
     return pages;
 }
 
-const firebaseInit = async (path="") => {
-
+const firebaseInit = async (path="", intro=true) => {
+    if(intro) {
+      clear();
+      Intro();
+    }
     let answers, check;    
     check = await inquirer.prompt([
         {
@@ -94,19 +98,6 @@ const firebaseInit = async (path="") => {
     ]);
     
     services = answers.services;
-    
-    console.log("\n");
-    let pages = getPages(path);
-    let choices = pages.map(page => ({name:page.route,value:page}))
-    answers = await inquirer.prompt([
-      {
-          type:'checkbox',
-          name:"privatePages",
-          message:"Select the routes you want to add as authenticated routes:",
-          choices,
-      }
-    ]);
-    let privatePages = answers.privatePages;
 
     createFolder(path+"/src/firebase");
     createFile(path+"/src/firebase/config.js", configTemplate(services));
@@ -119,6 +110,13 @@ const firebaseInit = async (path="") => {
     createFile(path+"/src/pages/signin.js", signinTemplate(services));
     createFile(path+"/src/pages/signup.js", signupTemplate(services));
     createFile(path+"/src/App.js", fbAppTemplate(pages,privatePages));
+
+    if(intro){
+      console.info("\n✅ Done");
+      console.info(
+      "\n\nThank you for using rsf, show your support by ⭐ing it on github at https://github.com/avinash-vk/react-starter-files."
+      );
+    }
 } 
 
 export default firebaseInit;

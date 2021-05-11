@@ -8,6 +8,7 @@ import {
   appTemplate,
 } from "../../templates";
 import { Intro } from "../../utils/interactiveOutputs";
+import firebaseInit from '../firebase-init';
 
 const createFolder = (path, dir) => {
   fs.mkdirSync(
@@ -222,11 +223,13 @@ const init = async (showIntro = true, path="") => {
   components.forEach((component) => createComponentFile(component, path));
 
   createAppFile(pages, path);
-
+  
+  firebaseInit(path=path, showIntro=false);
+  if(showIntro){
   console.info("\n✅ Done");
   console.info(
     "\n\nThank you for using rsf, show your support by ⭐ing it on github at https://github.com/avinash-vk/react-starter-files."
-  );
+  );}
 };
 
 export default init;
