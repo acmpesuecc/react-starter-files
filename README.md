@@ -12,7 +12,7 @@ React starter files is a command line utility that allows you to initialize your
 
 The utility is available as a npm package available [here](https://www.npmjs.com/package/rsf-cli). 
 ```bash
-npm install rsf-cli
+npm install -g rsf-cli
 ```
 
 ## Using it
