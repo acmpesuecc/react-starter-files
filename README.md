@@ -53,3 +53,20 @@ Check the current version for your rsf-cli!
 ```bash
 rsf version
 ```
+
+## Tech Stack
+Language: Javascript
+Tools Needed: (NodeJS)[https://nodejs.org/en/], (Yarn package manager)[https://yarnpkg.com/]
+
+## Getting started
+1. Clone the repository locally using.
+2. Run `yarn install` locally to install the dependencies.
+3. After that run `npm install -g` from the root of the repository to activate the cli in your environment
+4. Run `rsf` to view the different options available
+```
+$ yarn install
+
+$ npm install -g
+
+$ rsf
+```
