@@ -4,8 +4,7 @@ Everytime I created a React app, the first thing I did was setup the project by 
 
 React starter files is a command line utility that allows you to initialize your react app with your preferred components before you begin development.
 
-
-![demo](https://drive.google.com/uc?export=view&id=101Q9tgICPvsLVToBcb90lMt-xUBvKTJA)
+![rsf-demo](https://user-images.githubusercontent.com/51489449/137424766-ec668c68-1699-4d40-ac29-932c8d77ba48.gif)
 
 
 ## Install it
@@ -39,6 +38,7 @@ rsf create-react-app myapp
 ```
 
 > ### help
+
 Get help for all your commands :)
 ```bash
 rsf help
