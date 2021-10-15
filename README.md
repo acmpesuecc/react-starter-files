@@ -70,3 +70,9 @@ $ npm install -g
 
 $ rsf
 ```
+
+### Beginner friendly
+If you know NodeJs and the basics of how react works, you should be good to go!
+
+## Maintainer
+Avinash V K  -  avinash2000vk@gmail.com
