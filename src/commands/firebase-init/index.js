@@ -11,6 +11,7 @@ import {
 } from "../../templates";
 
 import { Intro } from '../../utils/interactiveOutputs';
+import { prettify } from "../../utils/formatter";
 
 const createFolder = (folderPath) => {
   fs.mkdirSync(
@@ -30,7 +31,7 @@ const createFolder = (folderPath) => {
 const createFile = (filePath, fileContent) => {
   fs.writeFile(
     process.cwd() + filePath,
-    fileContent,
+    prettify(fileContent),
     (error) => {
       if (error) {
         console.log("ERROR OCCURED:", error);
@@ -54,6 +55,8 @@ const getPages = (path) => {
     const content = fs.readFileSync(x);
     let y = content.toString().match(/export default ([\s\S]*?);/);
     y = y[1].replace(/\s/g, '').replace('{','').replace('}','').split(',');
+    // Filter out falsy values (empty strings) that can cause problems
+    y = y.filter(Boolean);
     let pages = []
     y.forEach(object => {
       let tmp = object.split(":");

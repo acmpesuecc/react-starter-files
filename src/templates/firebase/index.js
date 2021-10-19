@@ -25,7 +25,7 @@ const resetPassword = (email) => {
 `
 
 const providerAuthTemplate = (name) => `
-const ${name}Signin = () => {
+const ${name}Signin = async () => {
     try {
       await auth.signInWithPopup(${name}Provider).then(async user => {
         if(user.additionalUserInfo.isNewUser){
