@@ -10,6 +10,8 @@ import {
 import { Intro } from "../../utils/interactiveOutputs";
 import firebaseInit from '../firebase-init';
 
+import { prettify } from "../../utils/formatter";
+
 const createFolder = (path, dir) => {
   fs.mkdirSync(
     process.cwd() + dir + "/src" + path,
@@ -28,7 +30,7 @@ const createFolder = (path, dir) => {
 const createAppFile = (pages, path) => {
   fs.writeFile(
     process.cwd() + path + `/src/App.js`,
-    appTemplate(pages),
+    prettify(appTemplate(pages)),
     (error) => {
       if (error) {
         console.log("ERROR OCCURED:", error);
@@ -43,7 +45,7 @@ const createAppFile = (pages, path) => {
 const createComponentFile = (component, path) => {
   fs.writeFile(
     process.cwd() + path + `/src/components/${component}.js`,
-    componentTemplate(component),
+    prettify(componentTemplate(component)),
     (error) => {
       if (error) {
         console.log("ERROR OCCURED:", error);
@@ -58,7 +60,7 @@ const createComponentFile = (component, path) => {
 const createPageFile = (component, path) => {
   fs.writeFile(
     process.cwd() + path + `/src/pages/${component}.js`,
-    componentTemplate(component),
+    prettify(componentTemplate(component)),
     (error) => {
       if (error) {
         console.log("ERROR OCCURED:", error);
@@ -73,7 +75,7 @@ const createPageFile = (component, path) => {
 const createRouteFile = (pages, path) => {
   fs.writeFile(
     process.cwd() + path + `/src/routes/index.js`,
-    routesTemplate(pages),
+    prettify(routesTemplate(pages)),
     (error) => {
       if (error) {
         console.log("ERROR OCCURED:", error);

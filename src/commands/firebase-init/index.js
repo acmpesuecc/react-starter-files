@@ -11,6 +11,7 @@ import {
 } from "../../templates";
 
 import { Intro } from '../../utils/interactiveOutputs';
+import { prettify } from "../../utils/formatter";
 
 const createFolder = (folderPath) => {
   fs.mkdirSync(
@@ -30,7 +31,7 @@ const createFolder = (folderPath) => {
 const createFile = (filePath, fileContent) => {
   fs.writeFile(
     process.cwd() + filePath,
-    fileContent,
+    prettify(fileContent),
     (error) => {
       if (error) {
         console.log("ERROR OCCURED:", error);
