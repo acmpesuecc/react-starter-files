@@ -55,6 +55,8 @@ const getPages = (path) => {
     const content = fs.readFileSync(x);
     let y = content.toString().match(/export default ([\s\S]*?);/);
     y = y[1].replace(/\s/g, '').replace('{','').replace('}','').split(',');
+    // Filter out falsy values (empty strings) that can cause problems
+    y = y.filter(Boolean);
     let pages = []
     y.forEach(object => {
       let tmp = object.split(":");
